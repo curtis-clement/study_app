@@ -42,13 +42,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   formKey: _formKey,
                   primaryButtonText: 'Sign Up',
                   secondaryButtonText: 'I already have an account',
-                  onConfirm: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Form is valid - you signed up!'),
-                      ),
-                    );
-                  },
+                  onConfirm: () {},
                   onSecondaryButton: () {},
                 ),
               ],

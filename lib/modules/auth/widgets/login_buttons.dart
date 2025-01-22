@@ -6,7 +6,7 @@ class LoginButtons extends StatelessWidget {
   final String primaryButtonText;
   final String secondaryButtonText;
   final Function onSecondaryButton;
-  
+
   const LoginButtons({
     super.key,
     required this.formKey,
@@ -27,6 +27,9 @@ class LoginButtons extends StatelessWidget {
             style: ButtonStyle(
               elevation: WidgetStateProperty.all(0),
               backgroundColor: WidgetStateProperty.all(Colors.transparent),
+              foregroundColor: WidgetStateProperty.all(
+                Theme.of(context).colorScheme.primary,
+              ),
             ),
             onPressed: onSecondaryButton(),
             child: Text(secondaryButtonText),
