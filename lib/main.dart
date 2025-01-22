@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_app/screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.green,
       ),
-      home: Text('Hello World'),
+      home: HomeScreen(),
     );
   }
 }
