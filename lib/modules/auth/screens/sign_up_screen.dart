@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_app/modules/auth/screens/login_screen.dart';
 import 'package:study_app/modules/auth/widgets/sign_up_form.dart';
+import 'package:study_app/modules/auth/widgets/login_buttons.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -37,49 +38,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   passwordController: _passwordController,
                   confirmPasswordController: _confirmPasswordController,
                 ),
-                Container(
-                  margin: EdgeInsets.only(top: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: WidgetStateProperty.all(0),
-                          backgroundColor:
-                              WidgetStateProperty.all(Colors.transparent),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
-                            ),
-                          );
-                        },
-                        child: Text('I already have an account'),
+                LoginButtons(
+                  formKey: _formKey,
+                  primaryButtonText: 'Sign Up',
+                  secondaryButtonText: 'I already have an account',
+                  onConfirm: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Form is valid - you signed up!'),
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all(
-                            Theme.of(context).colorScheme.primary,
-                          ),
-                          foregroundColor: WidgetStateProperty.all(
-                            Colors.white,
-                          ),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Form is valid - you signed up!'),
-                              ),
-                            );
-                          }
-                        },
-                        child: Text('Sign Up'),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
+                  onSecondaryButton: () {},
                 ),
               ],
             ),
