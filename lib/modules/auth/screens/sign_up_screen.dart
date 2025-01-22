@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:study_app/modules/auth/screens/login_screen.dart';
+import 'package:study_app/modules/auth/widgets/sign_up_form.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +28,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Login Screen'),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
-                  textCapitalization: TextCapitalization.none,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
+                Text(
+                  'Sign Up',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(labelText: 'Password'),
-                  textCapitalization: TextCapitalization.none,
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
+                SignUpForm(
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                  confirmPasswordController: _confirmPasswordController,
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 12),
@@ -62,9 +49,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               WidgetStateProperty.all(Colors.transparent),
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          );
                         },
-                        child: Text('I don\'t have an account'),
+                        child: Text('I already have an account'),
                       ),
                       ElevatedButton(
                         style: ButtonStyle(
@@ -79,12 +71,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (_formKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('Logging you in!'),
+                                content: Text('Form is valid - you signed up!'),
                               ),
                             );
                           }
                         },
-                        child: Text('Login'),
+                        child: Text('Sign Up'),
                       ),
                     ],
                   ),
