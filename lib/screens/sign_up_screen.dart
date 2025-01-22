@@ -94,17 +94,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text('I already have an account'),
                       ),
                       ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStateProperty.all(
+                            Theme.of(context).colorScheme.primary,
+                          ),
+                          foregroundColor: WidgetStateProperty.all(
+                            Colors.white,
+                          ),
+                        ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(
-                                    'Form is valid - you signed up!'),
+                                content: Text('Form is valid - you signed up!'),
                               ),
                             );
                           }
                         },
-                        child: Text('Confirm'),
+                        child: Text('Sign Up'),
                       ),
                     ],
                   ),

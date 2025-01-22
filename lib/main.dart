@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:study_app/screens/main_screen.dart';
-import 'package:study_app/screens/login_screen.dart';
 import 'package:study_app/screens/sign_up_screen.dart';
 
 void main() => runApp(MyApp());
