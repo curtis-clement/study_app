@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:study_app/modules/auth/screens/login_screen.dart';
 import 'package:study_app/modules/auth/widgets/sign_up_form.dart';
 import 'package:study_app/modules/auth/widgets/login_buttons.dart';
 
@@ -16,6 +15,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
