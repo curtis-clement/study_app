@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_app/modules/auth/screens/login_screen.dart';
 import 'package:study_app/modules/auth/widgets/sign_up_form.dart';
 import 'package:study_app/modules/auth/widgets/login_buttons.dart';
 
@@ -15,6 +16,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  void _onConfirm() {
+    print('SIGN UP');
+  }
+
+  void _onSecondaryButton() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+  }
 
   @override
   void dispose() {
@@ -46,11 +58,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   confirmPasswordController: _confirmPasswordController,
                 ),
                 LoginButtons(
-                  formKey: _formKey,
                   primaryButtonText: 'Sign Up',
                   secondaryButtonText: 'I already have an account',
-                  onConfirm: () {},
-                  onSecondaryButton: () {},
+                  onConfirm: _onConfirm,
+                  onSecondaryButton: _onSecondaryButton,
                 ),
               ],
             ),

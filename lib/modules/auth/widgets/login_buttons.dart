@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 class LoginButtons extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
-  final Function onConfirm;
   final String primaryButtonText;
   final String secondaryButtonText;
-  final Function onSecondaryButton;
+  final VoidCallback onConfirm;
+  final VoidCallback onSecondaryButton;
 
   const LoginButtons({
     super.key,
-    required this.formKey,
     required this.onConfirm,
     required this.primaryButtonText,
     required this.secondaryButtonText,
@@ -31,7 +29,7 @@ class LoginButtons extends StatelessWidget {
                 Theme.of(context).colorScheme.primary,
               ),
             ),
-            onPressed: onSecondaryButton(),
+            onPressed: onSecondaryButton,
             child: Text(secondaryButtonText),
           ),
           ElevatedButton(
@@ -43,7 +41,7 @@ class LoginButtons extends StatelessWidget {
                 Colors.white,
               ),
             ),
-            onPressed: onConfirm(),
+            onPressed: onConfirm,
             child: Text(primaryButtonText),
           ),
         ],

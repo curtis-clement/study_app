@@ -4,7 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study_app/modules/auth/screens/sign_up_screen.dart';
-import 'package:study_app/modules/auth/screens/spash_screen.dart';
+import 'package:study_app/screens/spash_screen.dart';
+import 'package:study_app/screens/main_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +34,10 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const SplashScreen();
+          }
+
+          if (snapshot.hasData) {
+            return MainScreen();
           }
           return const SignUpScreen();
         },
