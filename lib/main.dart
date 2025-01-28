@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
           }
 
           if (snapshot.hasData) {
+            print('USER LOGGED IN');
             return MainScreen();
           }
           return const SignUpScreen();

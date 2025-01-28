@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_app/modules/auth/widgets/confirm_logout.dart';
 import 'package:study_app/screens/cards_screen.dart';
 import 'package:study_app/screens/decks_screen.dart';
 import 'package:study_app/screens/home_screen.dart';
@@ -53,15 +54,25 @@ class MainScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(right: 16),
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.grey[300],
-                    child: Text(
-                      'A',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ConfirmLogout();
+                        },
+                      );
+                    },
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.grey[300],
+                      child: Text(
+                        'A',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),

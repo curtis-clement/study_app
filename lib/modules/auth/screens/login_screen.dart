@@ -33,6 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
       password: _passwordController.text,
     );
 
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
+
     setState(() {
       _isAuthenticating = false;
     });
