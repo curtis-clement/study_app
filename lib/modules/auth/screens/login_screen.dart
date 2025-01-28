@@ -28,18 +28,32 @@ class _LoginScreenState extends State<LoginScreen> {
       _isAuthenticating = true;
     });
 
-    await _auth.signInWithEmailAndPassword(
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
 
-    if (mounted) {
-      Navigator.of(context).pop();
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+    } catch (error) {
+      // Handle login errors here
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Authentication failed. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isAuthenticating = false;
+        });
+      }
     }
-
-    setState(() {
-      _isAuthenticating = false;
-    });
   }
 
   void _onSecondaryButton() {
@@ -64,28 +78,28 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: _isAuthenticating ?
-                [
-                  Text('Authenticating...'),
-                  CircularProgressIndicator(),
-                ] : 
-                [
-                  Text(
-                    'Login',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  LoginForm(
-                    formKey: _formKey,
-                    emailController: _emailController,
-                    passwordController: _passwordController,
-                  ),
-                  LoginButtons(
-                    primaryButtonText: 'Login',
-                    secondaryButtonText: 'I don\'t have an account',
-                    onConfirm: _onConfirm,
-                    onSecondaryButton: _onSecondaryButton,
-                  ),
-                ],
+              children: _isAuthenticating
+                  ? [
+                      Text('Authenticating...'),
+                      CircularProgressIndicator(),
+                    ]
+                  : [
+                      Text(
+                        'Login',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      LoginForm(
+                        formKey: _formKey,
+                        emailController: _emailController,
+                        passwordController: _passwordController,
+                      ),
+                      LoginButtons(
+                        primaryButtonText: 'Login',
+                        secondaryButtonText: 'I don\'t have an account',
+                        onConfirm: _onConfirm,
+                        onSecondaryButton: _onSecondaryButton,
+                      ),
+                    ],
             ),
           ),
         ),
