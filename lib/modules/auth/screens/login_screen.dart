@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study_app/modules/auth/widgets/login_form.dart';
 import 'package:study_app/modules/auth/widgets/login_buttons.dart';
+
+final _auth = FirebaseAuth.instance;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,15 +14,28 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  var _isAuthenticating = false;
 
-  void _onConfirm() {
+  void _onConfirm() async {
     final isValid = _formKey.currentState!.validate();
-    if (isValid) {
-      print('LOGIN');
+    if (!isValid) {
+      return;
     }
+
+    setState(() {
+      _isAuthenticating = true;
+    });
+
+    await _auth.signInWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    setState(() {
+      _isAuthenticating = false;
+    });
   }
 
   void _onSecondaryButton() {
@@ -44,63 +60,28 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Login',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                LoginForm(
-                  formKey: _formKey,
-                  emailController: _emailController,
-                  passwordController: _passwordController,
-                ),
-                LoginButtons(
-                  primaryButtonText: 'Login',
-                  secondaryButtonText: 'I don\'t have an account',
-                  onConfirm: _onConfirm,
-                  onSecondaryButton: _onSecondaryButton,
-                ),
-                // Container(
-                //   margin: EdgeInsets.only(top: 12),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       ElevatedButton(
-                //         style: ButtonStyle(
-                //           elevation: WidgetStateProperty.all(0),
-                //           backgroundColor:
-                //               WidgetStateProperty.all(Colors.transparent),
-                //         ),
-                //         onPressed: () {
-                //           Navigator.pop(context);
-                //         },
-                //         child: Text('I don\'t have an account'),
-                //       ),
-                //       ElevatedButton(
-                //         style: ButtonStyle(
-                //           backgroundColor: WidgetStateProperty.all(
-                //             Theme.of(context).colorScheme.primary,
-                //           ),
-                //           foregroundColor: WidgetStateProperty.all(
-                //             Colors.white,
-                //           ),
-                //         ),
-                //         onPressed: () {
-                //           if (_formKey.currentState!.validate()) {
-                //             ScaffoldMessenger.of(context).showSnackBar(
-                //               SnackBar(
-                //                 content: Text('Logging you in!'),
-                //               ),
-                              
-                //             );
-                //           }
-                //         },
-                //         child: Text('Login'),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-              ],
+              children: _isAuthenticating ?
+                [
+                  Text('Authenticating...'),
+                  CircularProgressIndicator(),
+                ] : 
+                [
+                  Text(
+                    'Login',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  LoginForm(
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                  ),
+                  LoginButtons(
+                    primaryButtonText: 'Login',
+                    secondaryButtonText: 'I don\'t have an account',
+                    onConfirm: _onConfirm,
+                    onSecondaryButton: _onSecondaryButton,
+                  ),
+                ],
             ),
           ),
         ),
