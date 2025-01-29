@@ -38,7 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.of(context).pop();
       }
     } catch (error) {
-      // Handle login errors here
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
