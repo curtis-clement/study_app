@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_app/screens/cards_screen.dart';
+import 'package:study_app/modules/cards/screens/cards_screen.dart';
 import 'package:study_app/screens/decks_screen.dart';
 import 'package:study_app/screens/home_screen.dart';
 import 'package:study_app/modules/auth/widgets/confirm_logout.dart';
