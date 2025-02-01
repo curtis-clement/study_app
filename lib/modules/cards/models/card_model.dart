@@ -1,13 +1,13 @@
 import 'package:uuid/uuid.dart';
 
 class CardSide {
-  final String text;
-  final String? imageUrl;
-
   CardSide({
     required this.text,
     this.imageUrl,
   });
+
+  final String text;
+  final String? imageUrl;
 
   Map<String, dynamic> toJson() => {
     'text': text,
@@ -21,13 +21,13 @@ class CardSide {
 }
 
 class CardFront extends CardSide {
-  final String title;
-
   CardFront({
     required this.title,
     required super.text,
     super.imageUrl,
   });
+
+  final String title;
 
   @override
   Map<String, dynamic> toJson() => {
@@ -43,14 +43,6 @@ class CardFront extends CardSide {
 }
 
 class FlashCard {
-  final String id;
-  final CardFront front;
-  final CardSide back;
-  final List<String> deckIds;
-  final List<String> tagIds;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-
   FlashCard({
     String? id,
     required this.front,
@@ -65,6 +57,14 @@ class FlashCard {
     tagIds = tagIds ?? [],
     createdAt = createdAt ?? DateTime.now(),
     updatedAt = updatedAt ?? DateTime.now();
+
+  final String id;
+  final CardFront front;
+  final CardSide back;
+  final List<String> deckIds;
+  final List<String> tagIds;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
   Map<String, dynamic> toJson() => {
     'id': id,

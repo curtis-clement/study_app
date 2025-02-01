@@ -1,10 +1,6 @@
 import 'package:uuid/uuid.dart';
 
 class Tag {
-  final String id;
-  final String name;
-  final DateTime createdAt;
-
   Tag({
     String? id,
     required this.name,
@@ -13,6 +9,11 @@ class Tag {
   }) : 
     id = id ?? const Uuid().v4(),
     createdAt = createdAt ?? DateTime.now();
+  
+  final String id;
+  final String name;
+  final DateTime createdAt;
+
 
   Map<String, dynamic> toJson() => {
     'id': id,
