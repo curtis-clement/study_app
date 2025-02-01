@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:study_app/modules/auth/screens/login_screen.dart';
 import 'package:study_app/modules/auth/widgets/sign_up_form.dart';
 import 'package:study_app/modules/auth/widgets/login_buttons.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-final _auth = FirebaseAuth.instance;
+import 'package:study_app/services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -32,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     try {
-      await _auth.createUserWithEmailAndPassword(
+      await AuthService().signUpWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:study_app/modules/auth/widgets/confirm_logout.dart';
 import 'package:study_app/screens/cards_screen.dart';
 import 'package:study_app/screens/decks_screen.dart';
 import 'package:study_app/screens/home_screen.dart';
+import 'package:study_app/modules/auth/widgets/confirm_logout.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});

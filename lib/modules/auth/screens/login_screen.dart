@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study_app/modules/auth/widgets/login_form.dart';
 import 'package:study_app/modules/auth/widgets/login_buttons.dart';
-
-final _auth = FirebaseAuth.instance;
+import 'package:study_app/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -29,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      await _auth.signInWithEmailAndPassword(
+      await AuthService().signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );

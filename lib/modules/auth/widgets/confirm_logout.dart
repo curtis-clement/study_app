@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-final _auth = FirebaseAuth.instance;
+import 'package:study_app/services/auth_service.dart';
 
 class ConfirmLogout extends StatelessWidget {
   const ConfirmLogout({super.key});
@@ -20,7 +18,7 @@ class ConfirmLogout extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            _auth.signOut();
+            AuthService().signOut();
             Navigator.of(context).pop();
           },
           child: Text('Logout'),
