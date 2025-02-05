@@ -6,7 +6,28 @@ class CardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Cards')),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+        child: Column(
+          children: [
+            Center(
+              child: Text(
+                'Cards',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 8),
+            ElevatedButton.icon(
+              onPressed: () {},
+              label: Text('Add tag'),
+              icon: Icon(Icons.add),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
